@@ -9,6 +9,7 @@ session_start();
     <title>About Us - AURA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/Logo-S.png">
 </head>
 <body>
     <header>
@@ -24,8 +25,10 @@ session_start();
                 </ul>
 
                 <ul class="right-actions">
-                    <li><a href="login.php">LOG IN</a></li>
-                    <li><a href="signup.php" class="signup-btn">SIGN UP</a></li>
+                    <?php if (!isset($_SESSION['username'])): ?>
+                        <li><a href="login.php">LOG IN</a></li>
+                        <li><a href="signup.php" class="signup-btn">SIGN UP</a></li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </div>
