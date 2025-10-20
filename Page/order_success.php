@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../config/dbconfig.php';
 
 // Check if order_id is provided
@@ -35,29 +34,7 @@ $items = $conn->query("
     <link rel="icon" type="image/x-icon" href="../assets/img/Logo-S.png">
 </head>
 <body>
-<header>
-    <div class="header-content">
-        <div class="logo-container">
-            <img src="../assets/img/Logo-W.png" alt="AURA Logo" class="logo-img">
-        </div>
-        <nav>
-            <ul class="center-nav">
-                <li><a href="../index.php">HOME</a></li>
-                <li><a href="shop.php">SHOP</a></li>
-                <li><a href="about.php">ABOUT US</a></li>
-            </ul>
-            <ul class="right-actions">
-                <?php if (!isset($_SESSION['username'])): ?>
-                    <li><a href="login.php">LOG IN</a></li>
-                    <li><a href="signup.php" class="signup-btn">SIGN UP</a></li>
-                <?php else: ?>
-                    <li><span>Hi, <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
-                    <li><a href="../logout.php">LOG OUT</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </div>
-</header>
+<?php include 'header.php'; ?>
 
 <main>
     <h2>Thank You for Your Order!</h2>

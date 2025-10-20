@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../config/dbconfig.php';
 
 if (!isset($_GET['id'])) {
@@ -19,8 +18,11 @@ if (!$product) {
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($product['name']) ?> | AURA</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/Logo-S.png">
 </head>
 <body>
+<?php include 'header.php'; ?>
     <a href="shop.php">← Back to Shop</a>
     <h1><?= htmlspecialchars($product['name']) ?></h1>
     <img src="../assets/img/Products/<?= htmlspecialchars($product['image']) ?>" width="300">

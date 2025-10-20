@@ -1,81 +1,82 @@
 <?php
 session_start();
 include '../config/dbconfig.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit;
+    }
+
+    $product_id = intval($_POST['product_id']);
+    $user_id = intval($_SESSION['user_id']);
+
+    // Check if product already in cart
+    $check = $conn->query("SELECT * FROM cart WHERE user_id=$user_id AND product_id=$product_id");
+
+    if ($check->num_rows > 0) {
+        // Update quantity
+        $conn->query("UPDATE cart SET quantity = quantity + 1 WHERE user_id=$user_id AND product_id=$product_id");
+    } else {
+        // Insert new item
+        $conn->query("INSERT INTO cart (user_id, product_id, quantity) VALUES ($user_id, $product_id, 1)");
+    }
+
+    // Redirect to cart page after adding
+    header("Location: cart.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop | AURA</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="icon" type="image/x-icon" href="../assets/img/Logo-S.png">
 </head>
 <body>
 
-<header>
-    <div class="header-content">
-        <div class="logo-container">
-            <img src="../assets/img/Logo-W.png" alt="AURA Logo" class="logo-img" id="siteLogo">
-        </div>
-        <nav>
-            <ul class="center-nav">
-                <li><a href="cart.php">CART</a></li>
-                <li><a href="../index.php">HOME</a></li>
-                <li><a href="about.php">ABOUT US</a></li>
-            </ul>
-            <ul class="right-actions">
-                <?php if (!isset($_SESSION['username'])): ?>
-                    <li><a href="login.php">LOG IN</a></li>
-                    <li><a href="signup.php" class="signup-btn">SIGN UP</a></li>
-                <?php else: ?>
-                    <li><span>Hi, <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
-                    <li><a href="../logout.php">LOG OUT</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </div>
-</header>
+<?php include 'header.php'; ?>
 
 <main>
-    <h2>Our Collection</h2>
-
-    <div class="product-grid">
+    <h2>Shop</h2>
+    <div class="products-grid">
         <?php
-        $result = $conn->query("SELECT * FROM products ORDER BY id DESC");
-        if ($result && $result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                ?>
-                <div class="product-card">
-                    <a href="product.php?id=<?php echo $row['id']; ?>">
-                        <img src="../assets/img/Products/<?php echo $row['image']; ?>" alt="<?php echo $row['name']; ?>">
-                    </a>
-                    <h3><?php echo $row['name']; ?></h3>
-                    <p>₱<?php echo number_format($row['price'], 2); ?></p>
-                    <form method="POST" action="cart.php">
-                        <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
-                        <button type="submit" name="add_to_cart">Add to Cart</button>
-                    </form>
-                </div>
-                <?php
-            }
-        } else {
+        $products = $conn->query("SELECT * FROM products");
+        if ($products->num_rows > 0):
+            while ($product = $products->fetch_assoc()):
+        ?>
+        <div class="product-card">
+            <a href="product.php?id=<?php echo $product['id']; ?>">
+                <img src="../assets/Products/<?php echo htmlspecialchars($product['image']); ?>" 
+                     alt="<?php echo htmlspecialchars($product['name']); ?>" 
+                     class="product-img">
+            </a>
+            <h3>
+                <a href="product.php?id=<?php echo $product['id']; ?>">
+                    <?php echo htmlspecialchars($product['name']); ?>
+                </a>
+            </h3>
+            <p>₱<?php echo number_format($product['price'], 2); ?></p>
+            
+            <?php if (isset($_SESSION['user_id'])): ?>
+            <form method="POST">
+                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                <button type="submit">Add to Cart</button>
+            </form>
+            <?php else: ?>
+            <a href="login.php" class="shop-btn">Sign in to Add</a>
+            <?php endif; ?>
+        </div>
+        <?php
+            endwhile;
+        else:
             echo "<p>No products available.</p>";
-        }
+        endif;
         ?>
     </div>
 </main>
-
-<footer>
-    <div class="footer-content">
-        <div class="social-links">
-            <a href="#">Facebook</a> |
-            <a href="#">Instagram</a>
-        </div>
-        <p>© <?php echo date('Y'); ?> AURA. All rights reserved.</p>
-    </div>
-</footer>
 
 </body>
 </html>

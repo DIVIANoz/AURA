@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,22 +17,25 @@ session_start();
     <header>
         <div class="header-content">
             <div class="logo-container">
-                <img src="assets/img/Logo-W.png" alt="AURA Logo" class="logo-img" id="siteLogo">
-                
+                <a href="index.php"><img src="assets/img/Logo-W.png" alt="AURA Logo" class="logo-img" id="siteLogo"></a>
             </div>
             <nav>
                 <ul class="center-nav">
                     <li><a href="Page/cart.php">CART</a></li>
-                    <li><a href="index.php">HOME</a></li>
+                    <li><a href="Page/shop.php">SHOP</a></li>
                     <li><a href="Page/about.php">ABOUT US</a></li>
                 </ul>
 
                 <ul class="right-actions">
-                    <?php if (!isset($_SESSION['username'])): ?>
-                        <li><a href="Page/login.php">LOG IN</a></li>
-                        <li><a href="Page/signup.php" class="signup-btn">SIGN UP</a></li>
-                    <?php endif; ?>
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                    <li><a href="Page/login.php" class="login-btn">Sign In</a></li>
+                <?php else: ?>
+                    <li><a href="Page/logout.php" class="logout-btn">Logout</a></li>
+                <?php endif; ?>
                 </ul>
+            </nav>
+        </div>
+    </header>
 
             </nav>
         </div>

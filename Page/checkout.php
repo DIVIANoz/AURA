@@ -2,124 +2,113 @@
 session_start();
 include '../config/dbconfig.php';
 
-// Redirect if cart is empty
-if (empty($_SESSION['cart'])) {
-    header("Location: cart.php");
-    exit;
-}
-
-// Redirect if not logged in
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
 
-// Handle checkout form submission
+$user_id = intval($_SESSION['user_id']);
+$message = '';
+$order_placed = false;
+
+// Fetch cart items
+$cart_items = $conn->query("
+    SELECT c.id as cart_id, p.id as product_id, p.name, p.price, c.quantity
+    FROM cart c
+    JOIN products p ON c.product_id = p.id
+    WHERE c.user_id=$user_id
+");
+
+$total = 0;
+while ($item = $cart_items->fetch_assoc()) {
+    $total += $item['price'] * $item['quantity'];
+}
+
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fullname = $conn->real_escape_string($_POST['fullname']);
-    $phone = $conn->real_escape_string($_POST['phone']);
-    $address = $conn->real_escape_string($_POST['address']);
-    $email = $_SESSION['email'];
-    $total = 0;
+    $first_name = $conn->real_escape_string($_POST['first_name']);
+    $last_name  = $conn->real_escape_string($_POST['last_name']);
+    $phone      = $conn->real_escape_string($_POST['phone']);
+    $address    = $conn->real_escape_string($_POST['address']);
+    $payment_method = $conn->real_escape_string($_POST['payment_method']);
 
-    foreach ($_SESSION['cart'] as $item) {
-        $total += $item['price'] * $item['quantity'];
+    if ($total <= 0) {
+        $message = "Your cart is empty. Add items before checkout.";
+    } else {
+        // Insert order
+        $conn->query("INSERT INTO orders (user_id, total) VALUES ($user_id, $total)");
+        $order_id = $conn->insert_id;
+
+        // Insert order items
+        $cart_items = $conn->query("
+            SELECT c.id as cart_id, p.id as product_id, p.price, c.quantity
+            FROM cart c
+            JOIN products p ON c.product_id = p.id
+            WHERE c.user_id=$user_id
+        ");
+        while ($item = $cart_items->fetch_assoc()) {
+            $conn->query("INSERT INTO order_items (order_id, product_id, quantity) 
+                          VALUES ($order_id, {$item['product_id']}, {$item['quantity']})");
+        }
+
+        // Clear cart
+        $conn->query("DELETE FROM cart WHERE user_id=$user_id");
+        $order_placed = true;
     }
-
-    // Insert into orders table
-    $conn->query("INSERT INTO orders (fullname, phone, address, email, total_amount, order_date)
-                  VALUES ('$fullname', '$phone', '$address', '$email', '$total', NOW())");
-
-    $order_id = $conn->insert_id;
-
-    // Insert each product in order_items
-    foreach ($_SESSION['cart'] as $item) {
-        $pid = $item['id'];
-        $qty = $item['quantity'];
-        $price = $item['price'];
-        $conn->query("INSERT INTO order_items (order_id, product_id, quantity, price)
-                      VALUES ($order_id, $pid, $qty, $price)");
-    }
-
-    // Clear cart
-    $_SESSION['cart'] = [];
-
-    header("Location: order_success.php?order_id=$order_id");
-    exit;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout | AURA</title>
-    <link rel="icon" type="image/x-icon" href="../assets/img/Logo-S.png">
+<meta charset="UTF-8">
+<title>Checkout | AURA</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+.checkout-form { max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 1rem; }
+.checkout-form input, .checkout-form select, .checkout-form button { padding: 10px; font-size: 1rem; width: 100%; }
+.checkout-form h2 { text-align: center; }
+.payment-methods { display: flex; flex-direction: column; gap: 0.5rem; }
+.total-display { font-weight: bold; text-align: right; margin-bottom: 1rem; }
+.message { color: red; text-align: center; margin-bottom: 1rem; }
+.thank-you { text-align:center; padding:2rem; }
+</style>
 </head>
 <body>
-<header>
-    <div class="header-content">
-        <div class="logo-container">
-            <img src="../assets/img/Logo-W.png" alt="AURA Logo" class="logo-img">
-        </div>
-        <nav>
-            <ul class="center-nav">
-                <li><a href="cart.php">CART</a></li>
-                <li><a href="../index.php">HOME</a></li>
-                <li><a href="about.php">ABOUT US</a></li>
-            </ul>
-            <ul class="right-actions">
-                <?php if (!isset($_SESSION['username'])): ?>
-                    <li><a href="login.php">LOG IN</a></li>
-                    <li><a href="signup.php" class="signup-btn">SIGN UP</a></li>
-                <?php else: ?>
-                    <li><span>Hi, <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
-                    <li><a href="../logout.php">LOG OUT</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </div>
-</header>
+<?php include 'header.php'; ?>
 
 <main>
-    <h2>Checkout</h2>
+<?php if ($order_placed): ?>
+    <div class="thank-you">
+        <h2>Thank You for Your Purchase!</h2>
+        <p>Your order has been successfully placed.</p>
+        <a href="shop.php" class="shop-btn">Continue Shopping</a>
+    </div>
+<?php else: ?>
+    <h2 style="text-align:center;">Checkout</h2>
+    <?php if ($message) echo "<div class='message'>{$message}</div>"; ?>
 
-    <form method="POST">
-        <label>Full Name:</label><br>
-        <input type="text" name="fullname" required><br><br>
+    <form class="checkout-form" method="POST">
+        <div class="total-display">Total Amount: ₱<?php echo number_format($total, 2); ?></div>
 
-        <label>Phone Number:</label><br>
-        <input type="text" name="phone" required><br><br>
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="last_name" placeholder="Last Name" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <input type="text" name="address" placeholder="Address" required>
 
-        <label>Address:</label><br>
-        <textarea name="address" rows="3" required></textarea><br><br>
+        <div class="payment-methods">
+            <label>Choose Payment Method:</label>
+            <select name="payment_method" required>
+                <option value="Gcash">Gcash</option>
+                <option value="Maya">Maya</option>
+                <option value="BDO">BDO</option>
+                <option value="BPI">BPI</option>
+            </select>
+        </div>
 
-        <h3>Order Summary:</h3>
-        <table border="1" cellpadding="10" cellspacing="0">
-            <tr><th>Product</th><th>Quantity</th><th>Price</th><th>Total</th></tr>
-            <?php
-            $grand_total = 0;
-            foreach ($_SESSION['cart'] as $item):
-                $total = $item['price'] * $item['quantity'];
-                $grand_total += $total;
-            ?>
-            <tr>
-                <td><?php echo htmlspecialchars($item['name']); ?></td>
-                <td><?php echo $item['quantity']; ?></td>
-                <td>₱<?php echo number_format($item['price'], 2); ?></td>
-                <td>₱<?php echo number_format($total, 2); ?></td>
-            </tr>
-            <?php endforeach; ?>
-            <tr>
-                <td colspan="3" align="right"><strong>Grand Total:</strong></td>
-                <td><strong>₱<?php echo number_format($grand_total, 2); ?></strong></td>
-            </tr>
-        </table>
-
-        <br>
-        <button type="submit">Place Order</button>
+        <button type="submit">Confirm Payment</button>
     </form>
+<?php endif; ?>
 </main>
 
 </body>

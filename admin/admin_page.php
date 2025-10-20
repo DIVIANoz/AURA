@@ -23,25 +23,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = floatval($_POST['price']);
 
     // Image upload
-    $target_dir = "../assets/img/Products/";
+    $target_dir = "../assets/Products/";
+    if (!is_dir($target_dir)) {
+        mkdir($target_dir, 0755, true);
+    }
+
     $image_name = basename($_FILES["image"]["name"]);
     $target_file = $target_dir . $image_name;
 
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
         $sql = "INSERT INTO products (name, description, price, image)
                 VALUES ('$name', '$description', '$price', '$image_name')";
-
         if ($conn->query($sql)) {
-            echo "<p style='color:green;'>Product added successfully!</p>";
+            $success_message = "Product added successfully!";
         } else {
-            echo "<p style='color:red;'>SQL Error: " . $conn->error . "</p>";
+            $error_message = "SQL Error: " . $conn->error;
         }
     } else {
-        echo "<p>Upload error code: " . $_FILES['image']['error'] . "</p>";
-        echo "<p style='color:red;'>Image upload failed — check folder path or permissions.</p>";
+        $error_message = "Image upload failed — check folder path or permissions.";
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="admin-container">
         <header class="admin-header">
-            <h1>Welcome, <?php echo htmlspecialchars($_SESSION['admin_name']); ?></h1>
+            <h1>Welcome, Admin</h1>
             <div class="admin-actions">
                 <a href="admin_orders.php" class="orders-btn">View Orders</a>
                 <a href="logout.php" class="logout">
@@ -62,7 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </header>
 
-        
+        <?php if (isset($success_message)) echo "<p style='color:green;'>$success_message</p>"; ?>
+        <?php if (isset($error_message)) echo "<p style='color:red;'>$error_message</p>"; ?>
 
         <section class="add-product">
             <h2>Add Product</h2>
@@ -93,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <td>{$row['id']}</td>
                             <td>{$row['name']}</td>
                             <td>₱" . number_format($row['price'], 2) . "</td>
-                            <td><img src='../assets/img/Products/{$row['image']}' width='60'></td>
+                            <td><img src='../assets/Products/{$row['image']}' width='60'></td>
                             <td><a class='delete' href='admin_page.php?delete={$row['id']}'
                                    onclick='return confirm(\"Delete this product?\")'>Delete</a></td>
                         </tr>";
