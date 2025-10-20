@@ -1,0 +1,243 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #ffffff;
+  color: #111;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0e1a44;
+  padding: 1rem 1rem;
+}
+
+.logo-image {
+    height: 35px;
+    width: auto;
+    filter: brightness(0) invert(1); /* Makes the logo white */
+    display: block;
+} 
+
+
+
+.nav-buttons a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.nav-buttons a.signup {
+  background-color: #fff;
+  color: #0e1a44;
+}
+
+.nav-buttons a:hover {
+  opacity: 0.8;
+}
+
+
+
+/* HERO SECTION */
+.hero {
+  background-color: #f3f3f3;
+  text-align: center;
+  padding: 1rem 1rem;
+}
+
+.bottles img {
+  width: 150px;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.bottles img:hover {
+  transform: scale(1.05);
+}
+
+.bottles {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.bottles img {
+  width: 125px;
+  flex-shrink: 0;
+}
+
+.bottles-track {
+  display: flex;
+  animation: scroll-left 5s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+/* STORY SECTION */
+.story {
+  background-image: url("img/background.png");
+  background: size 50px;
+  background-color: #0e1a44;
+  color: #fff;
+  padding: 7rem 3rem;
+  display: flex;
+  justify-content: flex-start;  
+  align-items: flex-start;    
+  text-align: left;
+  position: relative;
+}
+
+.story::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3); /* darker overlay */
+}
+
+.story > * {
+  position: relative; /* Keeps text above overlay */
+}
+
+.story-text {
+  max-width: 600px;
+}
+
+
+.story h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.story p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: rem;
+  font-style: italic;
+}
+
+/* DISCOVER SECTION */
+.discover {
+  background-image: url("img/perfume bg.png");
+  background-size: cover;          
+  background-position: center;     
+  background-repeat: no-repeat;   
+  color: #ffffff;
+  position: relative;
+  height: 50h;                   
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 7rem;               
+  text-align: right;
+}
+
+.discover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3); /* darker overlay */
+}
+
+.discover > * {
+  position: relative; /* Keeps text above overlay */
+}
+
+.discover-text {
+  max-width: 600px;
+}
+
+.discover h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.discover p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+/* SHOP */
+
+.shop {
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;   
+  align-items: center;
+  text-align: center;
+}
+
+.shop-btn {
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  font-size: 1.3rem;        
+  padding: 1rem 2.5rem;     
+  color: #ffffff;           
+  background-color: #0e1a44; 
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.shop-btn:hover {
+  background-color: #1b2b6b;   
+  transform: translateY(-2px);
+}
+/* FOOTER */
+footer {
+  background-color: #0e1a44;
+  color: #fff;
+  text-align: left;
+  padding: 1.0rem;
+}
+
+.socials {
+  margin-bottom: 0.5rem;
+}
+
+.socials img {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+  transition: 0.3s;
+}
+
+.socials img:hover {
+  transform: scale(1.1);
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .bottles img {
+    width: 100px;
+  }
+}
