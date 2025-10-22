@@ -22,7 +22,6 @@ body {
 .logo-image {
     height: 35px;
     width: auto;
-    filter: brightness(0) invert(1); /* Makes the logo white */
     display: block;
 } 
 
@@ -49,59 +48,10 @@ body {
 }
 
 
-
-/* HERO SECTION */
-.hero {
-  background-color: #f3f3f3;
-  text-align: center;
-  padding: 1rem 1rem;
-}
-
-.bottles img {
-  width: 150px;
-  margin: 0 10px;
-  transition: transform 0.3s;
-}
-
-.bottles img:hover {
-  transform: scale(1.05);
-}
-
-.bottles {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 50px;
-  white-space: nowrap;
-  overflow: hidden;
-  position: relative;
-}
-
-.bottles img {
-  width: 125px;
-  flex-shrink: 0;
-}
-
-.bottles-track {
-  display: flex;
-  animation: scroll-left 5s linear infinite;
-}
-
-@keyframes scroll-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-
 /* STORY SECTION */
 .story {
   background-image: url("img/background.png");
   background: size 50px;
-  background-color: #0e1a44;
   color: #fff;
   padding: 7rem 3rem;
   display: flex;
