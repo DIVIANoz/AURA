@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* ===== SHOP PAGE STYLES ===== */
+.shop-page {
+    background-image: linear-gradient(to left, rgb(121, 121, 121) 0%, rgb(219, 219, 219) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Products Grid */
+.shop-page .products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+.shop-page .product-card {
+    background: #f0f3f8;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.shop-page .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.shop-page .product-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #040B3A;
+}
+
+.shop-page .product-image {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shop-page .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+}
+
+.shop-page .price {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    margin: 0.5rem 0;
+}
+
+.shop-page .button-group {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.shop-page .buy-btn, 
+.shop-page .cart-btn {
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    flex: 1;
+    transition: all 0.3s ease;
+    background-color: #040B3A;
+    color: #f0f0f0;
+    font-size: 0.9rem;
+}
+
+.shop-page .buy-btn:hover, 
+.shop-page .cart-btn:hover {
+    background-color: #041e63;
+}
