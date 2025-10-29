@@ -1,0 +1,209 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #000000;
+}
+
+/* Header styles */
+header {
+    background-color: #040B3A;
+    padding: 1rem 2rem;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.nav-links a.active {
+    font-weight: bold;
+}
+
+
+
+/* Main content styles */
+.about-page {
+    flex: 1;
+    background-color: #E5E5E5;
+}
+
+.smoke-background {
+    background-image: url('smoke-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: calc(100vh - 140px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.smoke-background {
+    position: relative;
+    min-height: calc(100vh - 140px);
+    padding: 4rem 2rem;
+    overflow: hidden;
+    background-color: #E5E5E5; /* light section color */
+
+    background-image: url('images/smokey epekk.png'); /* <-- your smoke image path */
+    background-repeat: no-repeat;
+    background-size: 600px auto; /* control size */
+    background-position: right center; /* move to the right like in reference */
+
+    display: flex;
+    align-items: center;
+}
+
+
+.main-flex {
+    display: flex;
+    width: 100%;
+    max-width: 1300px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 500px;
+    margin-left: 2vw;
+}
+
+.gibberish-text {
+    color: #000000;
+    font-size: 1.1rem;
+    opacity: 0.85;
+    margin-bottom: 3rem;
+    font-weight: 500;
+    text-align: left;
+}
+
+.gibberish-text p {
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.02em;
+}
+
+.social-links-row {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.social-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #000000;
+    background: none;
+}
+
+.social-item img {
+    width: 48px;
+    height: 48px;
+}
+
+.social-item span {
+    font-size: 1.25rem;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.right-block {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 0;
+}
+
+.aura-title {
+    font-family: 'Cinzel', serif;
+    font-size: 80px;
+    letter-spacing: 20px;
+    color: #fff;
+    text-align: right;
+    font-weight: 400;
+    margin-right: 2vw;
+    white-space: nowrap;
+}
+
+/* Footer styles */
+footer {
+    background-color: #040B3A;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .main-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    .left-block {
+        min-width: 0;
+        width: 100%;
+        align-items: center;
+        margin-left: 0;
+    }
+    .gibberish-text {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .social-links-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .right-block {
+        width: 100%;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+    .aura-title {
+        font-size: 3rem;
+        letter-spacing: 0.5rem;
+        margin-right: 0;
+        text-align: center;
+    }
+}
