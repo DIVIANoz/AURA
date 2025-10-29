@@ -1,0 +1,101 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* ===== ABOUT PAGE MAIN CONTENT ===== */
+.about-page {
+    flex: 1;
+    background-image: linear-gradient(to left, rgb(121, 121, 121)0%, rgb(219, 219, 219)100%);
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Flex layout for left and right blocks */
+.main-flex {
+    display: flex;
+    width: 100%;
+    max-width: 1300px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* LEFT CONTENT */
+.left-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 500px;
+    margin-left: 2vw;
+}
+
+.about-section h1 {
+    font-size: 2rem;
+    color: #000;
+    margin-bottom: 1rem;
+}
+
+.about-section p {
+    color: #000;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+}
+
+.about-content h2 {
+    margin-top: 1.5rem;
+    color: #000;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Social links */
+.social-links-row {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.social-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #000;
+}
+
+.social-item img {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+}
+
+/* RIGHT CONTENT */
+.right-block {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 0;
+}
+
+.aura-title {
+    font-family: 'Cinzel', serif;
+    font-size: 80px;
+    letter-spacing: 20px;
+    color: #000000;
+    text-align: right;
+    font-weight: 400;
+    margin-right: 2vw;
+    white-space: nowrap;
+}
