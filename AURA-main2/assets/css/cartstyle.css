@@ -1,0 +1,147 @@
+/* =========================
+   GLOBAL STYLES
+   ========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+}
+
+/* =========================
+   CART CONTAINER
+   ========================= */
+.cart-container {
+    max-width: 900px;
+    margin: 50px auto 200px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.cart-title {
+    text-align: center;
+    color: #040B3A;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+/* =========================
+   CART ITEMS
+   ========================= */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+}
+
+.cart-item:hover {
+    transform: scale(1.01);
+}
+
+/* ----- Left Section (Image + Name + Price + Checkbox) ----- */
+.item-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-left img {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.price {
+    font-size: 1rem;
+    color: #555;
+}
+
+/*QUANTITY CONTROLS & TRASH */
+.item-right {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Buttons */
+.quantity-controls button {
+    cursor: pointer;
+    border: none;
+    background-color: #040B3A;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.quantity-controls button:hover {
+    background-color: #2E3E91;
+}
+
+/* Number input */
+.qty-input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/*TOTAL SECTION */
+.cart-total-section {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.primary-btn {
+    background-color: #040B3A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.primary-btn:hover {
+    background-color: #2E3E91;
+}
+
+/*EMPTY CART MESSAGE*/
+.empty-cart {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #777;
+    margin-top: 80px;
+}
