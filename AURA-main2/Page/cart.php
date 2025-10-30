@@ -34,12 +34,12 @@ $cart_items = $conn->query("
     <header class="site-header">
         <div class="site-header-content">
             <div class="site-logo-container">
-                <img src="../assets/img/Logo-W.png" alt="AURA" class="site-logo-img">
+                <a href="../index.php"><img src="../assets/img/Logo-W.png" alt="AURA" class="site-logo-img"></a>
             </div>
             <nav class="site-center-nav site-nav">
                 <ul>
                     <li><a href="cart.php" class="active">CART</a></li>
-                    <li><a href="../index.php">HOME</a></li>
+                    <li><a href="shop.php">SHOP</a></li>
                     <li><a href="aboutus.php">ABOUT US</a></li>
                 </ul>
             </nav>

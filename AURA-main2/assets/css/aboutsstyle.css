@@ -8,12 +8,13 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
+    background: #fff;
 }
 
 /* ===== ABOUT PAGE MAIN CONTENT ===== */
 .about-page {
     flex: 1;
-    background-image: linear-gradient(to left, rgb(121, 121, 121)0%, rgb(219, 219, 219)100%);
+    
     padding: 4rem 2rem;
     display: flex;
     justify-content: center;
@@ -27,6 +28,7 @@ body {
     max-width: 1300px;
     justify-content: space-between;
     align-items: center;
+    margin-inline: 5%;
 }
 
 /* LEFT CONTENT */

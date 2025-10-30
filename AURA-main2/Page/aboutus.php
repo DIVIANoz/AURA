@@ -29,7 +29,7 @@ session_start();
             <nav class="site-nav">
                 <ul class="site-center-nav">
                     <li><a href="cart.php">CART</a></li>
-                    <li><a href="../index.php">HOME</a></li>
+                    <li><a href="shop.php">SHOP</a></li>
                     <li><a href="aboutus.php" class="active">ABOUT US</a></li>
                 </ul>
 
@@ -55,25 +55,25 @@ session_start();
                 <section class="about-section">
                     <h1>About AURA</h1>
                     <p>
-                        Welcome to AURA, where we believe that every scent tells a unique story. 
-                        Our passion for perfumery combines artisanal craftsmanship with modern sophistication 
-                        to create fragrances that capture moments, memories, and emotions.
+                        Welcome to AURA, where we believe that every scent tells a unique story.<br> 
+                        Our passion for perfumery combines artisanal craftsmanship with modern sophistication <br> 
+                        to create fragrances that capture moments, memories, and emotions.<br> 
                     </p>
 
                     <div class="about-content">
                         <h2>Our Story</h2>
                         <p>
-                            Founded with a vision to create personal and timeless fragrances, 
-                            AURA has been dedicated to the art of perfumery. 
-                            We carefully select the finest ingredients and combine them to create 
-                            scents that resonate with individuality and elegance.
+                            Founded with a vision to create personal and timeless fragrances, <br> 
+                            AURA has been dedicated to the art of perfumery. <br> 
+                            We carefully select the finest ingredients and combine them to create <br> 
+                            scents that resonate with individuality and elegance.<br> 
                         </p>
 
                         <h2>Our Philosophy</h2>
                         <p>
-                            At AURA, we believe that perfume is more than just a fragrance – it's a form of self-expression. 
-                            Each of our creations is designed to enhance your personal story, 
-                            adding subtle sophistication to your everyday moments.
+                            At AURA, we believe that perfume is more than just a fragrance – it's a form of self-expression.<br>  
+                            Each of our creations is designed to enhance your personal story, <br> 
+                            adding subtle sophistication to your everyday moments.<br> 
                         </p>
                     </div>
 

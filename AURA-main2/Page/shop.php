@@ -21,13 +21,13 @@ include '../config/dbconfig.php';
     <header class="site-header">
         <div class="site-header-content">
             <div class="site-logo-container">
-                <img src="../assets/img/Logo-W.png" alt="AURA" class="site-logo-img">
+                <a href="../index.php"><img src="../assets/img/Logo-W.png" alt="AURA" class="site-logo-img"></a>
             </div>
 
             <nav class="site-nav">
                 <ul class="site-center-nav">
                     <li><a href="cart.php">CART</a></li>
-                    <li><a href="../index.php">HOME</a></li>
+                    <li><a href="shop.php" class="active">SHOP</a></li>
                     <li><a href="aboutus.php">ABOUT US</a></li>
                 </ul>
 
@@ -56,7 +56,7 @@ include '../config/dbconfig.php';
             <div class="product-card">
                 <p class="product-name"><?= htmlspecialchars($product['name']); ?></p>
                 <div class="product-image">
-                    <img src="../assets/Products/<?= htmlspecialchars($product['image']); ?>" alt="<?= htmlspecialchars($product['name']); ?>">
+                    <img src="../assets/img/Products/<?= htmlspecialchars($product['image']); ?>" alt="<?= htmlspecialchars($product['name']); ?>">
                 </div>
                 <div class="price">₱ <?= number_format($product['price'], 2); ?></div>
                 <form method="POST" action="cart_add.php">

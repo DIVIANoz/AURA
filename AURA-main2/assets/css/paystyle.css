@@ -1,3 +1,4 @@
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +13,7 @@ body {
   min-height: 100vh;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 header {
   background-color: #0d1530;
   color: white;
@@ -38,7 +39,7 @@ header h1 {
   text-align: center;
 }
 
-/* CHECKOUT MAIN SECTION */
+/* ===== CHECKOUT MAIN SECTION ===== */
 .checkout {
   flex: 1;
   background-color: #d9d9d9;
@@ -48,7 +49,7 @@ header h1 {
   gap: 40px;
 }
 
-/* MENU BUTTON */
+/* ===== MENU BUTTON ===== */
 .menu-container {
   display: flex;
   justify-content: center;
@@ -72,7 +73,12 @@ header h1 {
   transform: scale(1.05);
 }
 
-/* PRODUCT SECTION */
+.menu-btn a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===== PRODUCT SECTION ===== */
 .product {
   display: flex;
   align-items: center;
@@ -99,7 +105,7 @@ header h1 {
   color: #000;
 }
 
-/* PAYMENT SECTION */
+/* ===== PAYMENT SECTION ===== */
 .payment-section {
   display: flex;
   flex-direction: column;
@@ -132,7 +138,7 @@ header h1 {
   transform: scale(1.03);
 }
 
-/* ORDER SUMMARY */
+/* ===== ORDER SUMMARY ===== */
 .order-summary {
   display: flex;
   justify-content: flex-end;
@@ -164,8 +170,58 @@ header h1 {
   color: white;
 }
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer {
   background-color: #0d1530;
   height: 55px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .checkout {
+    padding: 40px 20px;
+    gap: 30px;
+  }
+
+  .product {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .product img {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .payment-options {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .payment-options img {
+    width: 45%;
+    max-width: 150px;
+  }
+
+  .order-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .order-summary button {
+    width: 100%;
+    text-align: center;
+  }
+
+  header {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  header a {
+    position: static;
+    margin-bottom: 10px;
+  }
 }

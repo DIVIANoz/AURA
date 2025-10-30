@@ -68,13 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header class="site-header">
         <div class="site-header-content">
             <div class="site-logo-container">
-                <img src="../assets/img/Logo-W.png" alt="AURA Logo" class="site-logo-img" id="siteLogo">
+                <a href="../index.php"><img src="../assets/img/Logo-W.png" alt="AURA Logo" class="site-logo-img" id="siteLogo"></a>
             </div>
 
             <nav class="site-nav">
                 <ul class="site-center-nav">
                     <li><a href="../Page/cart.php">CART</a></li>
-                    <li><a href="../index.php">HOME</a></li>
+                    <li><a href="../Page/shop.php">SHOP</a></li>
                     <li><a href="../Page/aboutus.php">ABOUT US</a></li>
                 </ul>
 
