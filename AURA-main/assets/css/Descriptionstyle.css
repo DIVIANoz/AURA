@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #fff;
+    color: #2c2c2c;
+    line-height: 1.6;
+}
+
+/* ===== PRODUCT DETAIL LAYOUT ===== */
+.product-detail-2row-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Top Section: Image and Info */
+.product-detail-2row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.product-detail-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.product-image.transparent img {
+    width: 200px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* Product Info */
+.product-detail-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.product-title-main {
+    font-size: 36px;
+    font-weight: 700;
+    color: #040B3A;
+}
+
+.product-title-sub {
+    font-size: 20px;
+    font-weight: 500;
+    color: #444;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.buy-btn,
+.cart-btn {
+    background-color: #040B3A;
+    color: #fff;
+    padding: 10px 25px;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buy-btn:hover,
+.cart-btn:hover {
+    background-color: #d4af37;
+}
+
+/* ===== BOTTOM SECTION ===== */
+.product-detail-2row-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.about-title {
+    font-size: 30px;
+    font-weight: 600;
+    color: #040B3A;
+    margin-bottom: 10px;
+}
+
+.product-description {
+    font-size: 18px;
+    line-height: 1.7;
+    text-align: justify;
+    color: #333;
+}
+
+/* Ingredients Grid */
+.product-ingredients-2col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 30px;
+    background-color: #cfd4dd;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .product-detail-2row-top {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-detail-right {
+        text-align: center;
+    }
+
+    .button-group {
+        justify-content: center;
+    }
+
+    .product-image.transparent img {
+        width: 250px;
+    }
+}
